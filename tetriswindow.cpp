@@ -38,21 +38,14 @@ TetrisWindow::TetrisWindow(QWidget *parent)
         connect(quitButton , &QPushButton::clicked, qApp, &QCoreApplication::quit);
         connect(pauseButton, &QPushButton::clicked, board, &TetrixBoard::pause);
         connect(playButton, &QPushButton::clicked, board, &TetrixBoard::pause);
-    #if __cplusplus >= 201402L
-        connect(board, &TetrixBoard::scoreChanged,
-                scoreLcd, qOverload<int>(&QLCDNumber::display));
-        connect(board, &TetrixBoard::levelChanged,
-                levelLcd, qOverload<int>(&QLCDNumber::display));
-        connect(board, &TetrixBoard::linesRemovedChanged,
-                linesLcd, qOverload<int>(&QLCDNumber::display));
-    //#else
+
         connect(board, &TetrixBoard::scoreChanged,
                 scoreLcd, QOverload<int>::of(&QLCDNumber::display));
         connect(board, &TetrixBoard::levelChanged,
                 levelLcd, QOverload<int>::of(&QLCDNumber::display));
         connect(board, &TetrixBoard::linesRemovedChanged,
                 linesLcd, QOverload<int>::of(&QLCDNumber::display));
-    #endif
+
 
         QGridLayout *layout = new QGridLayout;
         layout->addWidget(board, 0, 0, 15, 8);
